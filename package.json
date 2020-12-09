@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/amberwhizin/carefulFriends-api/issues"
   },
-  "homepage": "https://github.com/amberwhizin/carefulFriends-api#readme"
+  "homepage": "https://github.com/amberwhizin/carefulFriends-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.6"
+  }
 }
