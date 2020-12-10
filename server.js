@@ -8,7 +8,17 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost:27017/" + "carefulfriends";
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("Connection Successful")) 
+  .catch((err) => console.log(err));
+mongoose.connection.once("open", () => {
+  console.log("connected to mongoose!");
+});
 
 db.on("error", (err) => console.log(err.message + " is Mongod not running?"));
 db.on("connected", () => console.log("mongo connected: ", MONGODB_URI));
