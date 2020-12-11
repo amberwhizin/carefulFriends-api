@@ -36,17 +36,12 @@ app.use(express.static(path.join(__dirname, "client/build")));
 let baseURL;
 
 if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:5000";
+  baseURL = "http://localhost:5000/activities";
 } else {
   baseURL = "https://carefulfriends-client.herokuapp.com";
 }
 
 console.log("current base URL:", baseURL);
-
-//Handles any requests that don't match the ones above
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
-// });
 
 // CONTROLLERS
 const activityController = require("./controllers/friends_controller");
