@@ -5,9 +5,12 @@ const ActivityOptions = require("../models/friends");
 
 //test
 activities.get("/", (req, res) => {
-  const list = ["item1", "item2", "item3"];
-  res.json(list);
-  console.log("Sent list of items");
+   ActivityOptions.find({}, (error, foundList) => {
+     if (error) {
+       res.status(400).json({ error: error.message });
+     }
+     res.status(200).json(foundList);
+   });
 });
 
 //Create
