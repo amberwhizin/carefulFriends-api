@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
+
 const app = express();
 const db = mongoose.connection;
 
@@ -14,7 +16,7 @@ mongoose
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
-  .then(() => console.log("Connection Successful")) 
+  .then(() => console.log("Connection Successful"))
   .catch((err) => console.log(err));
 mongoose.connection.once("open", () => {
   console.log("connected to mongoose!");
@@ -28,10 +30,21 @@ db.on("open", () => {});
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("/", (req, res) => {
-  res.send("Hello!");
-});
+//Handles any requests that don't match the ones above
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
+// });
+
+// CONTROLLERS
+const activityController = require("./controllers/friends_controller");
+app.use("/activities", activityController);
+
+// // test
+// const testAPIRouter = require("./controllers/friends_controller");
+// app.use("/testAPI", testAPIRouter);
 
 app.listen(PORT, () => {
   console.log("Listening to port", PORT);
