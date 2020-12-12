@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const path = require("path");
 const cors = require("cors");
 
@@ -48,6 +49,7 @@ db.on("open", () => {});
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(methodOverride("_method"));
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 
