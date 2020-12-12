@@ -54,9 +54,9 @@ app.use(express.static(path.join(__dirname, "client/build")));
 let baseURL;
 
 if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:5000/activities";
+  baseURL = "http://localhost:5000";
 } else {
-  baseURL = "https://carefulfriends-client.herokuapp.com";
+  baseURL = "https://carefulfriends-api.herokuapp.com";
 }
 
 console.log("current base URL:", baseURL);
