@@ -1,11 +1,29 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
 const db = mongoose.connection;
 
 const PORT = process.env.PORT || 5000;
+
+const allowedURLs = [
+  "http://localhost:3000",
+  "https://carefulfriends-client.herokuapp.com",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedURLs.indexOf(origin) >= 0) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost:27017/" + "carefulfriends";
