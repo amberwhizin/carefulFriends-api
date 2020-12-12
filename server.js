@@ -34,6 +34,8 @@ app.use(express.json());
 app.use(methodOverride("_method"));
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
+// app.use("/", express.static(path.join(__dirname, "/client/build")));
+
 
 let baseURL;
 
