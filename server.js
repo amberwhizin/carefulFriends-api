@@ -50,6 +50,8 @@ console.log("current base URL:", baseURL);
 // CONTROLLERS
 const activityController = require("./controllers/friends_controller");
 app.use("/activities", activityController);
+const optionController = require("./controllers/friends_controller");
+app.use("/options", activityController);
 
 // // test
 // const testAPIRouter = require("./controllers/friends_controller");
