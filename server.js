@@ -36,7 +36,6 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "client/build")));
 // app.use("/", express.static(path.join(__dirname, "/client/build")));
 
-
 let baseURL;
 
 if (process.env.NODE_ENV === "development") {
@@ -48,14 +47,12 @@ if (process.env.NODE_ENV === "development") {
 console.log("current base URL:", baseURL);
 
 // CONTROLLERS
-const activityController = require("./controllers/friends_controller");
+const activityController = require("./controllers/activities_controller");
 app.use("/activities", activityController);
-const optionController = require("./controllers/friends_controller");
-app.use("/options", activityController);
 
-// // test
-// const testAPIRouter = require("./controllers/friends_controller");
-// app.use("/testAPI", testAPIRouter);
+// const signupController = require("./controllers/signup_controller");
+// app.use("/signup", signupController);
+
 
 app.listen(PORT, () => {
   console.log("Listening to port", PORT);

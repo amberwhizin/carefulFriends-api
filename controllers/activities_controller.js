@@ -1,9 +1,9 @@
 const express = require("express");
 const activities = express.Router();
 
-const ActivityOptions = require("../models/friends");
+const ActivityOptions = require("../models/activities");
 
-//test
+// Index
 activities.get("/", (req, res) => {
    ActivityOptions.find({}, (error, foundActivity) => {
      if (error) {
@@ -13,18 +13,17 @@ activities.get("/", (req, res) => {
    });
 });
 
-//Create
+// Create
 activities.post("/", (req, res) => {
   ActivityOptions.create(req.body, (error, createdActivity) => {
     if (error) {
       res.status(400).json({ error: error.message });
     }
-    // sending it back here!
     res.status(200).json(createdActivity);
   });
 });
 
-// delete
+// Delete
 activities.delete("/:id", (req, res) => {
   ActivityOptions.findByIdAndRemove(req.params.id, (error, deletedActivity) => {
     if (error) {

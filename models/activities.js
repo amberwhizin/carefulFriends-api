@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const PostCarefulFriend = new Schema({
-  name: { type: String, required: true, unique: true },
+const PostCarefulActivity = new Schema({
+  name: { type: String, required: true },
   entry: String,
   img: String,
   // userId: { type: Schema.ObjectId, ref: "User", required: true, unique: true },
 });
 
-const Friend = mongoose.model("Friend", PostCarefulFriend);
+const Activity = mongoose.model("Activity", PostCarefulActivity);
 
-module.exports = Friend;
+module.exports = Activity;
