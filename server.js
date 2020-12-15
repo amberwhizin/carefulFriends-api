@@ -41,7 +41,7 @@ let baseURL;
 if (process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:5000";
 } else {
-  baseURL = "https://carefulfriends-api.herokuapp.com";
+  baseURL = "https://carefulfriends-api.herokuapp.com/activities";
 }
 
 console.log("current base URL:", baseURL);
