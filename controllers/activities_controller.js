@@ -16,12 +16,15 @@ activities.get("/", auth, (req, res) => {
 
 // Create
 activities.post("/", auth, (req, res) => {
-  ActivityOptions.create(req.body, (error, createdActivity) => {
-    if (error) {
-      res.status(400).json({ error: error.message });
+  ActivityOptions.create(
+    { activityName: req.body.activityName, owner: req.user.name },
+    (error, createdActivity) => {
+      if (error) {
+        res.status(400).json({ error: error.message });
+      }
+      res.status(200).json(createdActivity);
     }
-    res.status(200).json(createdActivity);
-  });
+  );
 });
 
 // Delete
