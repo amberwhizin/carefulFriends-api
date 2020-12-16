@@ -8,7 +8,15 @@ function authenticate(req, res, next) {
     if (err) {
       res.status(404).send("Invalid signup Info...Sorry!");
     } else if (user) {
-      res.json(user);
+      user.generateToken((err, user) => {
+        if (err) {
+          res.status(404).send("Something went wrong...");
+        }
+        res
+          .cookie("ths_auth", user.token)
+          .status(200)
+          .json({ "Login Success": true });
+      });
     }
   });
 }
