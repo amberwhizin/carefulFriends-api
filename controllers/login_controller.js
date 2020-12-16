@@ -5,8 +5,9 @@ const User = require("../models/user");
 
 function authenticate(req, res, next) {
   User.findOne({ name: req.body.name }, function (err, user) {
-    if (err) {
-      throw err;
+    debugger;
+    if (err || !user) {
+      res.status(404).send("Invalid Login Info...Sorry!");
     }
     if (user) {
       user.comparePassword(req.body.password, function (err, isMatch) {
