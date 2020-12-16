@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const path = require("path");
 
+require("dotenv").config();
+
 const app = express();
-const router = express.Router();
+// const router = express.Router();
 const db = mongoose.connection;
 
 const PORT = process.env.PORT || 5000;
@@ -30,6 +33,7 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 
 db.on("open", () => {});
 
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride("_method"));
@@ -55,14 +59,17 @@ console.log("current base URL:", baseURL);
 
 // CONTROLLERS
 // main
+
 const activityController = require("./controllers/activities_controller");
 app.use("/activities", activityController);
 
 const signupController = require("./controllers/signup_controller");
 const loginController = require("./controllers/login_controller");
+const logoutController = require("./controllers/logout_controller");
 
 app.use("/signup", signupController);
 app.use("/login", loginController);
+app.use("/logout", logoutController);
 
 app.listen(PORT, () => {
   console.log("Listening to port", PORT);

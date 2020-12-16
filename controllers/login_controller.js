@@ -14,7 +14,15 @@ function authenticate(req, res, next) {
           res.status(404).send("Something went wrong...");
         }
         if (isMatch) {
-          res.json(user);
+          user.generateToken((err, user) => {
+            if (err) {
+              res.status(404).send("Something went wrong...");
+            }
+            res
+              .cookie("ths_auth", user.token)
+              .status(200)
+              .json({ "Login Success": true });
+          });
         } else {
           res.status(404).send("Invalid Login Info...Sorry!");
         }

@@ -2,10 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const usersSchema = new Schema({
   name: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  token: {
+    type: String,
+  },
 });
 
 usersSchema.pre("save", function (next) {
@@ -38,6 +42,24 @@ usersSchema.methods.comparePassword = function (candidatePassword, cb) {
       return cb(err);
     }
     cb(null, isMatch);
+  });
+};
+usersSchema.methods.generateToken = function (cb) {
+  const user = this;
+  const token = jwt.sign(user._id.toHexString(), process.env.SECRET);
+  user.token = token;
+  user.save(function (err, user) {
+    if (err) return cb(err);
+    cb(null, user);
+  });
+};
+usersSchema.statics.findByToken = function (token, cb) {
+  const user = this;
+  jwt.verify(token, process.env.SECRET, function (err, decode) {
+    user.findOne({ _id: decode, token: token }, function (err, user) {
+      if (err) return cb(err);
+      cb(null, user);
+    });
   });
 };
 
