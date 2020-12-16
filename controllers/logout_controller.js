@@ -2,6 +2,7 @@ const express = require("express");
 const logout = express.Router();
 
 const User = require("../models/user");
+const auth = require("../middleware/auth");
 
 function authenticate(req, res, next) {
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, doc) => {
@@ -12,5 +13,5 @@ function authenticate(req, res, next) {
   });
 }
 
-logout.delete("/", authenticate);
+logout.delete("/", auth, authenticate);
 module.exports = logout;
