@@ -63,6 +63,9 @@ console.log("current base URL:", baseURL);
 const activityController = require("./controllers/activities_controller");
 app.use("/activities", activityController);
 
+const commentsController = require("./controllers/comments_controller");
+app.use("/comment", commentsController);
+
 const signupController = require("./controllers/signup_controller");
 const loginController = require("./controllers/login_controller");
 const logoutController = require("./controllers/logout_controller");
