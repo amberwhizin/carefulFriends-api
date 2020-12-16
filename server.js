@@ -50,9 +50,9 @@ app.use(express.static(path.join(__dirname, "client/build")));
 let baseURL;
 // come back - back end not getting hit in heroku environment
 if (process.env.NODE_ENV === "development") {
-  baseURL = "http://localhost:5000/";
+  baseURL = "http://localhost:5000";
 } else {
-  baseURL = "https://carefulfriends-api.herokuapp.com/";
+  baseURL = "https://carefulfriends-api.herokuapp.com";
 }
 
 console.log("current base URL:", baseURL);
