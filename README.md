@@ -5,6 +5,11 @@ https://github.com/amberwhizin/carefulfriends-client
 
 ## Technologies
 
+- Fullstack MERN App 
+- Full CRUD
+
+## Backend
+
 1. Mongodb
 2. Express
 3. Mongoose
