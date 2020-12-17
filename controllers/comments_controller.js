@@ -49,5 +49,29 @@ comment.delete("/:id", auth, (req, res) => {
     }
   });
 });
+// Edit
+comment.put("/:id", auth, (req, res) => {
+  CommentsModel.findById(req.params.id, (error, comment) => {
+    if (comment.owner === req.user.name) {
+      CommentsModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          text: req.body.text,
+          _activityId: req.body._activityId,
+          owner: req.user.name,
+        },
+        { new: true },
+        (error, updatedComment) => {
+          if (error) {
+            res.status(400).json({ error: error.message });
+          }
+          res.status(200).json(updatedComment);
+        }
+      );
+    } else {
+      res.status(400).json({ error: "You can't edit other users comments" });
+    }
+  });
+});
 
 module.exports = comment;
