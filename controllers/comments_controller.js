@@ -33,11 +33,20 @@ comment.post("/", auth, (req, res) => {
 
 // Delete
 comment.delete("/:id", auth, (req, res) => {
-  CommentsModel.findByIdAndRemove(req.params.id, (error, deletedComment) => {
-    if (error) {
-      res.status(400).json({ error: error.message });
+  CommentsModel.findById(req.params.id, (error, comment) => {
+    if (comment.owner === req.user.name) {
+      CommentsModel.findByIdAndRemove(
+        req.params.id,
+        (error, deletedComment) => {
+          if (error) {
+            res.status(400).json({ error: error.message });
+          }
+          res.status(200).json(deletedComment);
+        }
+      );
+    } else {
+      res.status(400).json({ error: "You can't delete other users comments" });
     }
-    res.status(200).json(deletedComment);
   });
 });
 
