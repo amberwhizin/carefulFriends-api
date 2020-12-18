@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
+const cors = require("cors");
 const path = require("path");
 
 require("dotenv").config();
@@ -37,6 +38,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride("_method"));
+app.use(cors());
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 //or this....
