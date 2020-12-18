@@ -24,7 +24,7 @@ const allowedURLs = [
 
 const corsOptions = {
   origin: (origin, callback) => {
-    if (allowedURLs.indexOf(origin) >= 0) {
+    if (allowedURLs.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
