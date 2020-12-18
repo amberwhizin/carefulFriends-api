@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
-const cors = require("cors");
 const path = require("path");
 
 require("dotenv").config();
@@ -15,24 +14,6 @@ const PORT = process.env.PORT || 5000;
 
 const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost:27017/" + "carefulfriends";
-
-// cors
-const allowedURLs = [
-  "http://localhost:3000",
-  "https://carefulfriends-client.herokuapp.com",
-];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedURLs.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
-
-app.use(cors(corsOptions));
 
 mongoose
   .connect(MONGODB_URI, {
