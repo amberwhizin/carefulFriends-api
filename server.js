@@ -34,6 +34,8 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 
 db.on("open", () => {});
 
+app.set("trust proxy", 1);
+
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
