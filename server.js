@@ -45,7 +45,7 @@ app.use(
       "https://carefulfriends-client.herokuapp.com",
     ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
+    preflightContinue: true,
     optionsSuccessStatus: 204,
   })
 );
