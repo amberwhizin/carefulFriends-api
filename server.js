@@ -7,6 +7,29 @@ const path = require("path");
 
 require("dotenv").config();
 
+const cors = require("cors");
+
+// Configuration
+require("dotenv").config();
+const PORT = process.env.PORT;
+const MONGODB_URI = process.env.MONGODB_URI;
+
+const whitelist = [
+  "http://localhost:3000",
+  "https://carefulfriends-client.herokuapp.com/",
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
+
 const app = express();
 // const router = express.Router();
 const db = mongoose.connection;
@@ -34,24 +57,11 @@ db.on("disconnected", () => console.log("mongo disconnected"));
 
 db.on("open", () => {});
 
-app.set("trust proxy", 1);
-
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride("_method"));
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://carefulfriends-client.herokuapp.com",
-    ],
-    credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false, //change
-    optionsSuccessStatus: 204,
-  })
-);
+
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 
