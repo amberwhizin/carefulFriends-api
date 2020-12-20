@@ -46,6 +46,7 @@ app.use(
       "http://localhost:3000",
       "https://carefulfriends-client.herokuapp.com",
     ],
+    credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false, //change
     optionsSuccessStatus: 204,
