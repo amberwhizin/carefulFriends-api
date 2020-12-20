@@ -6,10 +6,13 @@ const auth = (req, res, next) => {
   //Checking if the token is valid
   const token = req.cookies.ths_auth;
 
+  console.log({ token });
+
   User.findByToken(token, (err, user) => {
     if (err) {
       throw err;
     }
+    console.log({ user });
     if (!user) {
       return res.json({
         isAuth: false,
