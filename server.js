@@ -14,38 +14,37 @@ require("dotenv").config();
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// const whitelist = [
-//   "http://localhost:3000",
-//   "https://carefulfriends-client.herokuapp.com/",
-// ];
 // const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
+//   origin: ["http://localhost", "https://carefulfriends-client.herokuapp.com/"],
+//   allowedHeaders: [
+//     "Content-Type",
+//     "Authorization",
+//     "Access-Control-Allow-Methods",
+//     "Access-Control-Request-Headers",
+//   ],
+//   credentials: true,
+//   enablePreflight: true,
 // };
 
 // app.use(cors(corsOptions));
+// app.options("*", cors(corsOptions));
+
+const app = express();
+const whitelist = [
+  "http://localhost:3000",
+  "https://carefulfriends-client.herokuapp.com/",
+];
 const corsOptions = {
-  origin: ["http://localhost", "https://carefulfriends-client.herokuapp.com/"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "Access-Control-Allow-Methods",
-    "Access-Control-Request-Headers",
-  ],
-  credentials: true,
-  enablePreflight: true,
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-
-const app = express();
-// const router = express.Router();
 const db = mongoose.connection;
 
 const PORT = process.env.PORT || 5000;
