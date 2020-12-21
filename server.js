@@ -23,8 +23,8 @@ const app = express();
 //   enablePreflight: true,
 // };`
 
-app.use(cors(corsOptions));/
-app.options("*", cors(corsOptions));
+// app.use(cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 const whitelist = [
   "http://localhost:3000",
