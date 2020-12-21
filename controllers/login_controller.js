@@ -20,8 +20,8 @@ function authenticate(req, res, next) {
             }
             res
               .cookie("ths_auth", user.token, {
-                domain: "https://carefulfriends-api.herokuapp.com",
-                path: "/login",
+                domain: "http://localhost:3000",
+                path: "/",
                 secure: true,
               })
               .status(200)
