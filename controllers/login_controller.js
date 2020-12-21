@@ -21,8 +21,9 @@ function authenticate(req, res, next) {
             res
               .cookie("ths_auth", user.token, {
                 httpOnly: true,
-                sameSite: "none",
-                secure: true,
+                sameSite:
+                  process.env.NODE_ENV === "development" ? true : "none",
+                secure: process.env.NODE_ENV === "development" ? false : true,
               })
               .status(200)
               .json({ "Login Success": true });
