@@ -11,7 +11,7 @@ require("dotenv").config();
 
 const app = express();
 
-// const corsOptions = {
+// `const corsOptions = {
 //   origin: ["http://localhost", "https://carefulfriends-client.herokuapp.com/"],
 //   allowedHeaders: [
 //     "Content-Type",
@@ -21,26 +21,26 @@ const app = express();
 //   ],
 //   credentials: true,
 //   enablePreflight: true,
-// };
+// };`
 
-app.use(cors());
-// app.options("*", cors(corsOptions));
+app.use(cors(corsOptions));/
+app.options("*", cors(corsOptions));
 
-// const whitelist = [
-//   "http://localhost:3000",
-//   "https://carefulfriends-client.herokuapp.com/",
-// ];
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-// };
+const whitelist = [
+  "http://localhost:3000",
+  "https://carefulfriends-client.herokuapp.com/",
+];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 const db = mongoose.connection;
 
