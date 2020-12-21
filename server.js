@@ -15,6 +15,7 @@ var corsOptions = {
   credentials: true,
 };
 app.options("*", cors(corsOptions)); // preflight OPTIONS; put before other routes
+app.options("/login", (req, res) => res.status(200).end());
 
 const allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
