@@ -44,17 +44,9 @@ db.on("open", () => {});
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-// Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 
-//or this....
-// app.use("/", express.static(path.join(__dirname, "/client/build")));
-
-// for heroku???
-// app.use('/', router.get('/', function(req, res, next) {
-//   res.sendFile(path.join(__dirname, './index.html'))
-// }))
+// Serve the static files from the React app
 
 let baseURL;
 // come back - back end not getting hit in heroku environment
