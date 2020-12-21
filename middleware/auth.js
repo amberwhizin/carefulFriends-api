@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
     }
     console.log({ user });
     if (!user) {
-      return res.json({
+      return res.status(400).json({
         isAuth: false,
         error: true,
       });
