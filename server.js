@@ -11,37 +11,11 @@ require("dotenv").config();
 
 const app = express();
 
-// `const corsOptions = {
-//   origin: ["http://localhost", "https://carefulfriends-client.herokuapp.com/"],
-//   allowedHeaders: [
-//     "Content-Type",
-//     "Authorization",
-//     "Access-Control-Allow-Methods",
-//     "Access-Control-Request-Headers",
-//   ],
-//   credentials: true,
-//   enablePreflight: true,
-// };`
-
-// app.use(cors(corsOptions));
-// app.options("*", cors(corsOptions));
-
-const whitelist = [
-  "http://localhost:3000",
-  "https://carefulfriends-client.herokuapp.com/",
-];
 const corsOptions = {
-  origin: function (origin, callback) {
-    return callback(null, true);
-    if (whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: true,
+  credentials: true,
 };
-
-app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // preflight OPTIONS; put before other routes
 
 const db = mongoose.connection;
 
