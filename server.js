@@ -10,8 +10,8 @@ require("dotenv").config();
 
 const app = express();
 
-const corsOptions = {
-  origin: true,
+var corsOptions = {
+  origin: ["http://localhost:3000", "https://carefulfriends-client.app"],
   credentials: true,
 };
 app.options("*", cors(corsOptions)); // preflight OPTIONS; put before other routes
