@@ -19,7 +19,11 @@ function authenticate(req, res, next) {
               res.status(404).send("Something went wrong...");
             }
             res
-              .cookie("ths_auth", user.token)
+              .cookie("ths_auth", user.token, {
+                domain: "http://localhost:3000",
+                path: "/login",
+                secure: true,
+              })
               .status(200)
               .json({ "Login Success": true });
           });
