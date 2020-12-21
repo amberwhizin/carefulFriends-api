@@ -8,7 +8,6 @@ const path = require("path");
 require("dotenv").config();
 
 // Configuration
-require("dotenv").config();
 
 const app = express();
 
