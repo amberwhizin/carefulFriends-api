@@ -32,6 +32,7 @@ const whitelist = [
 ];
 const corsOptions = {
   origin: function (origin, callback) {
+    return callback(null, true);
     if (whitelist.includes(origin)) {
       callback(null, true);
     } else {
