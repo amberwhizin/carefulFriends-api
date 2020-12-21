@@ -12,8 +12,8 @@ const app = express();
 
 var corsOptions = {
   origin: [
-    "https://carefulfriends-client.app",
-    "https://carefulfriends-client.app",
+    "https://carefulfriends-client.herokuapp.com",
+    "https://carefulfriends-client.herokuapp.com",
   ],
   credentials: true,
 };
@@ -22,11 +22,11 @@ app.options("*", cors(corsOptions)); // preflight OPTIONS; put before other rout
 const allowCrossDomain = function (req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://carefulfriends-client.app"
+    "https://carefulfriends-client.herokuapp.com"
   );
   res.header(
     "Access-Control-Allow-Header",
-    "https://carefulfriends-client.app"
+    "https://carefulfriends-client.herokuapp.com"
   );
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type");
