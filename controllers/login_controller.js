@@ -20,7 +20,7 @@ function authenticate(req, res, next) {
             }
             res
               .cookie("ths_auth", user.token, {
-                domain: "http://localhost:3000",
+                domain: "https://carefulfriends-client.app",
                 secure: true,
               })
               .status(200)
