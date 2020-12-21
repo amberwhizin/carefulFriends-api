@@ -22,7 +22,6 @@ function authenticate(req, res, next) {
               .cookie("ths_auth", user.token, {
                 domain: "http://localhost:3000",
                 path: "/",
-                secure: true,
               })
               .status(200)
               .json({ "Login Success": true });
