@@ -12,20 +12,20 @@ require("dotenv").config();
 
 const app = express();
 
-const corsOptions = {
-  origin: ["http://localhost", "https://carefulfriends-client.herokuapp.com/"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "Access-Control-Allow-Methods",
-    "Access-Control-Request-Headers",
-  ],
-  credentials: true,
-  enablePreflight: true,
-};
+// const corsOptions = {
+//   origin: ["http://localhost", "https://carefulfriends-client.herokuapp.com/"],
+//   allowedHeaders: [
+//     "Content-Type",
+//     "Authorization",
+//     "Access-Control-Allow-Methods",
+//     "Access-Control-Request-Headers",
+//   ],
+//   credentials: true,
+//   enablePreflight: true,
+// };
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use(cors());
+// app.options("*", cors(corsOptions));
 
 // const whitelist = [
 //   "http://localhost:3000",
