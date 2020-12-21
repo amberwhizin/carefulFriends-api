@@ -35,6 +35,7 @@ activities.post("/", auth, (req, res) => {
 
 // Delete
 activities.delete("/:id", auth, (req, res) => {
+  console.log({ auth });
   ActivityModel.findByIdAndRemove(req.params.id, (error, deletedActivity) => {
     if (error) {
       res.status(400).json({ error: error.message });
